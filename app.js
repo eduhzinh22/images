@@ -10,29 +10,24 @@ app.get("/", (req, res) => {
   res.json({resultado: "Estou Online"});
 });
 
-
 app.get('/lk/api/canvas/welcome', async (req, res) => {
   try {
     const { profile, number, nomegp, membercnt } = req.query;
-    
+
     if (!profile || !number || !nomegp || !membercnt) {
-      return res.json({ resultado: "Está Faltando Algum Parâmetro." });
+      return res.status(400).send("Está faltando algum parâmetro.");
     }
 
-    const data = await Welcome(profile, number, nomegp, membercnt);
+    const imageUrl = await Welcome(profile, number, nomegp, membercnt);
 
-    return res.json({
-      status: true,
-      creator: "Lkzinha",
-      resultado: data
-    });
+    const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+
+    res.set('Content-Type', 'image/png'); // ou image/jpeg dependendo do conteúdo
+    res.send(Buffer.from(response.data));
 
   } catch (e) {
     console.error(e);
-    return res.json({
-      status: false,
-      resultado: "Error"
-    });
+    res.status(500).send("Erro ao gerar imagem.");
   }
 });
 
