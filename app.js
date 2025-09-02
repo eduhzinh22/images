@@ -2,7 +2,6 @@ const express = require("express");
 const axios = require("axios");
 
 const app = express();
-
 const { Play, Welcome } = require('./banner.js')
 
 // Rota inicial
