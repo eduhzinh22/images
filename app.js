@@ -2,7 +2,7 @@ const express = require("express");
 const axios = require("axios");
 
 const app = express();
-const { Play, Welcome } = require('./banner.js')
+const { Play, Welcome, PerfilLg } = require('./banner.js')
 
 // Rota inicial
 app.get("/", (req, res) => {
@@ -20,6 +20,27 @@ app.get('/lk/api/canvas/welcome', async (req, res) => {
     const imageUrl = await Welcome(profile, number, nomegp, membercnt);
 
     const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+
+    res.set('Content-Type', 'image/png'); // ou image/jpeg dependendo do conteúdo
+    res.send(Buffer.from(response.data));
+
+  } catch (e) {
+    console.error(e);
+    res.status(500).send("Erro ao gerar imagem.");
+  }
+});
+
+app.get('/lk/api/canvas/perfil', async (req, res) => {
+  try {
+    const { profile, pushname, messages, level, xp } = req.query;
+
+    if (!profile || !pushname || !messages || !level || !xp) {
+      return res.status(400).send("Está faltando algum parâmetro.");
+    }
+
+    const imageUurl = await PerfilLg(profile, pushname, messages, level, xp);
+
+    const response = await axios.get(imageUurl, { responseType: 'arraybuffer' });
 
     res.set('Content-Type', 'image/png'); // ou image/jpeg dependendo do conteúdo
     res.send(Buffer.from(response.data));
