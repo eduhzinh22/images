@@ -32,6 +32,102 @@ const gerarImagem = async (html, css, width = '1200', height = '500') => {
   }
 };
 
+const PerfilLg = async (profilePicUrl, userName, messageCount, level, xp) => {
+  const html = `
+    <html>
+      <body>
+        <div class="container">
+          <div class="side left">
+            <div class="info">
+              <label>📛 Nome</label>
+              <span>${userName}</span>
+            </div>
+            <div class="info">
+              <label>💬 Mensagens</label>
+              <span>${messageCount}</span>
+            </div>
+          </div>
+
+          <div class="center">
+            <img src="${profilePicUrl}" class="avatar" />
+          </div>
+
+          <div class="side right">
+            <div class="info">
+              <label>🧬 Level</label>
+              <span>${level}</span>
+            </div>
+            <div class="info">
+              <label>📈 XP</label>
+              <span>${xp}</span>
+            </div>
+          </div>
+        </div>
+      </body>
+    </html>
+  `;
+
+  const css = `
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #12151c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .container {
+      width: 1200px;
+      height: 500px;
+      background: #1e212b;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 60px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .side {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .info label {
+      font-size: 18px;
+      color: #bbb;
+    }
+
+    .info span {
+      font-size: 26px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .center {
+      position: relative;
+    }
+
+    .avatar {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 6px solid #4e9eff;
+      box-shadow: 0 0 20px #4e9eff88;
+    }
+  `;
+
+  return await gerarImagem(html, css, '1200', '500');
+};
 
 const Welcome = async (profilePic, userNumber, groupName, memberCount) => {
   const html = `
@@ -296,4 +392,4 @@ const Play = async (thumbnailImage, songName, artistName, duration) => {
   return await gerarImagem(html, css);
 };
 
-module.exports = { Play, Welcome};
+module.exports = { Play, PerfilLg, Welcome};
