@@ -39,11 +39,11 @@ const PerfilLg = async (profilePicUrl, userName, messageCount, level, xp) => {
         <div class="container">
           <div class="side left">
             <div class="info">
-              <label>📛 Nome</label>
+              <label>📛 Nome: </label>
               <span>${userName}</span>
             </div>
             <div class="info">
-              <label>💬 Mensagens</label>
+              <label>💬 Mensagens: </label>
               <span>${messageCount}</span>
             </div>
           </div>
@@ -54,11 +54,11 @@ const PerfilLg = async (profilePicUrl, userName, messageCount, level, xp) => {
 
           <div class="side right">
             <div class="info">
-              <label>🧬 Level</label>
+              <label>🧬 Level: </label>
               <span>${level}</span>
             </div>
             <div class="info">
-              <label>📈 XP</label>
+              <label>📈 XP: </label>
               <span>${xp}</span>
             </div>
           </div>
